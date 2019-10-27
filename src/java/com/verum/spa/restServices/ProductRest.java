@@ -13,10 +13,12 @@ package com.verum.spa.restServices;
 import com.google.gson.Gson;
 import com.verum.spa.core.JsonResponses;
 import com.verum.spa.dao.DAOProduct;
+import com.verum.spa.model.Product;
 import java.sql.SQLException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
@@ -30,19 +32,19 @@ public class ProductRest {
     String value = "";
     boolean flag = false;
 
-//    @POST
-//    @Path("add")
-//    public Response addProduct(Request request) throws ClassNotFoundException, SQLException {
-//        String proName = request.queryParams("username");
-//        String proBrand;
-//        String proPrice;
-//        if (daoPro.addProduct(proName, proBrand, proPrice)) {
-//            flag = true;
-//            return Response.ok(JsonResponses.jsonResponse(flag)).build();
-//        } else {
-//            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
-//        }
-//    }
+    @POST
+    @Path("add")
+    public Response addProduct(
+            Product pro) throws ClassNotFoundException, SQLException {
+        
+        if (daoPro.addProduct(pro.getProName(), pro.getProBrand(), pro.getProPrice())) {
+            flag = true;
+            return Response.ok(JsonResponses.jsonResponse(flag)).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
+        }
+    }
+
     @PUT
     public Response modifyProduct(@QueryParam("proName") String proName,
             @QueryParam("proBrand") String proBrand,
@@ -67,7 +69,11 @@ public class ProductRest {
 
     @GET
     @Path("productList")
-    public Response productList(@DefaultValue("1") @QueryParam("prefVis") boolean prefVis) throws SQLException, ClassNotFoundException {
+    public Response productList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
+        /*Se agrega un parametro, para mostrar productos activos o inactivos. Por defecto, siempre se muestran
+       solo activos (0).
+        Si la aplicacion manda 1 quiere decir que se muestre tanto activos como inactivos
+         */
         value = new Gson().toJson(daoPro.productList(prefVis));
         if (value != null) {
             return Response.ok(value).build();
