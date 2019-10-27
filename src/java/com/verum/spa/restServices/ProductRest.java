@@ -68,6 +68,7 @@ public class ProductRest {
     @GET
     @Path("productList")
     public Response productList(@DefaultValue("1") @QueryParam("prefVis") boolean prefVis) throws SQLException, ClassNotFoundException {
+       
         value = new Gson().toJson(daoPro.productList(prefVis));
         if (value != null) {
             return Response.ok(value).build();
