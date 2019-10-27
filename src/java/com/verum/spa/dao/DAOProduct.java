@@ -9,7 +9,6 @@
  *===========================================================================*/
 package com.verum.spa.dao;
 
-
 import com.verum.spa.model.ConexionSpaMYSQL;
 import com.verum.spa.model.Product;
 import java.sql.*;
@@ -73,16 +72,14 @@ public class DAOProduct {
         }
     }
 
-    public ArrayList<Product> productList(boolean preVis) throws SQLException, ClassNotFoundException {
+    public ArrayList<Product> productList(int preVis) throws SQLException, ClassNotFoundException {
         ResultSet rs;
         ArrayList<Product> productData = new ArrayList<>();
-
-        sql = "SELECT * FROM PRODUCT";
-//        if (preVis) {
-//
-//        } else {
-//            sql = "SELECT * FROM PRODUCT WHERE proStatus LIKE NULL";
-//        }
+        if (preVis == 0) {
+            sql = "SELECT * FROM PRODUCT";
+        } else {
+          sql = "SELECT * FROM PRODUCT WHERE proStatus LIKE 0";
+        }
 
         Class.forName(conexion.getDRIVER());
         pst = conexion.startConnection().prepareStatement(sql);
@@ -99,7 +96,6 @@ public class DAOProduct {
         } else {
             return null;
         }
-
     }
 
 }
