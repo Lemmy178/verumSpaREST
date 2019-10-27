@@ -1,8 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*=============================================================================
+ |       Author:  Ruben
+ |       Course:  Spa
+ |     Due Date:  10/18/2019
+ |  Description:  Product Model
+ |                
+ | Deficiencies:  Falta de acentos en respuestas.
+
+                http://localhost:8080/VerumRESTSpa/api/product
+ *===========================================================================*/
 package com.verum.spa.restServices;
 
 import com.google.gson.Gson;
@@ -12,18 +17,11 @@ import java.sql.SQLException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
-/**
- * REST Web Service
- *
- * @author ruben
- */
 @Path("product")
 public class ProductRest {
 
@@ -32,20 +30,19 @@ public class ProductRest {
     String value = "";
     boolean flag = false;
 
-    @POST
-    @Path("add")
-    public Response addProduct(Request request) throws ClassNotFoundException, SQLException {
-        String proName = request.queryParams("username");
-        String proBrand;
-        String proPrice;
-        if (daoPro.addProduct(proName, proBrand, proPrice)) {
-            flag = true;
-            return Response.ok(JsonResponses.jsonResponse(flag)).build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
-        }
-    }
-
+//    @POST
+//    @Path("add")
+//    public Response addProduct(Request request) throws ClassNotFoundException, SQLException {
+//        String proName = request.queryParams("username");
+//        String proBrand;
+//        String proPrice;
+//        if (daoPro.addProduct(proName, proBrand, proPrice)) {
+//            flag = true;
+//            return Response.ok(JsonResponses.jsonResponse(flag)).build();
+//        } else {
+//            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
+//        }
+//    }
     @PUT
     public Response modifyProduct(@QueryParam("proName") String proName,
             @QueryParam("proBrand") String proBrand,
