@@ -34,10 +34,9 @@ public class ProductRest {
 
     @POST
     @Path("add")
-    public Response addProduct(
-            Product pro) throws ClassNotFoundException, SQLException {
+    public Response addProduct(Product pro) throws ClassNotFoundException, SQLException {
         
-        if (daoPro.addProduct(pro.getProName(), pro.getProBrand(), pro.getProPrice())) {
+        if (daoPro.addProduct2(pro.getProName(), pro.getProBrand(), pro.getProPrice())) {
             flag = true;
             return Response.ok(JsonResponses.jsonResponse(flag)).build();
         } else {

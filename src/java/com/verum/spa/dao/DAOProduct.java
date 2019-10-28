@@ -38,6 +38,22 @@ public class DAOProduct {
         }
     }
 
+    public boolean addProduct2(String proName, String proBrand, double proPrice) throws ClassNotFoundException, SQLException {
+        ConexionSpaMYSQL cone = new ConexionSpaMYSQL();
+        Connection conn;
+        PreparedStatement pst;
+        sql = "INSERT INTO PRODUCT(proName,proBrand,proPrice,proStatus) VALUES (?,?,?," + 1 + ")";
+        Class.forName(cone.getDRIVER());
+        conn = DriverManager.getConnection(cone.getPATH(), cone.getUSER(), cone.getPASS());
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, proName);
+        pst.setString(2, proBrand);
+        pst.setDouble(3, proPrice);
+        pst.executeUpdate();
+        conn.close();
+        return true;
+    }
+
     public boolean modifyProduct(String proName, String proBrand, double proPrice) throws ClassNotFoundException, SQLException {
         sql = "CALL MODIFYPRODUCT(?,?,?)";
 
@@ -78,7 +94,7 @@ public class DAOProduct {
         if (preVis == 0) {
             sql = "SELECT * FROM PRODUCT";
         } else {
-          sql = "SELECT * FROM PRODUCT WHERE proStatus LIKE 0";
+            sql = "SELECT * FROM PRODUCT WHERE proStatus LIKE 0";
         }
 
         Class.forName(conexion.getDRIVER());
