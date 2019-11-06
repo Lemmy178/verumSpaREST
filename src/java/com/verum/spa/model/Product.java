@@ -12,66 +12,66 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    @SerializedName("idPro")
-    private int idPro;
-    @SerializedName("proName")
-    private String proName;
-    @SerializedName("proBrand")
-    private String proBrand;
-    @SerializedName("proPrice")
-    private double proPrice;
-    @SerializedName("proStatus")
-    private boolean proStatus;
+    @SerializedName("prodId")
+    private int prodId;
+    @SerializedName("prodName")
+    private String prodName;
+    @SerializedName("brand")
+    private String brand;
+    @SerializedName("prodStatus")
+    private int prodStatus;
+    @SerializedName("useCost")
+    private double useCost;
 
     public Product() {
     }
 
-    public Product(int idPro, String proName, String proBrand, double proPrice, boolean proStatus) {
-        this.idPro = idPro;
-        this.proName = proName;
-        this.proBrand = proBrand;
-        this.proPrice = proPrice;
-        this.proStatus = proStatus;
+    public Product(int prodId, String prodName, String brand, int prodStatus, double useCost) {
+        this.prodId = prodId;
+        this.prodName = prodName;
+        this.brand = brand;
+        this.prodStatus = prodStatus;
+        this.useCost = useCost;
     }
 
-    public int getIdPro() {
-        return idPro;
+    public int getProdId() {
+        return prodId;
     }
 
-    public void setIdPro(int idPro) {
-        this.idPro = idPro;
+    public void setProdId(int prodId) {
+        this.prodId = prodId;
     }
 
-    public String getProName() {
-        return proName;
+    public String getProdName() {
+        return prodName;
     }
 
-    public void setProName(String proName) {
-        this.proName = proName;
+    public void setProdName(String prodName) {
+        this.prodName = prodName;
     }
 
-    public String getProBrand() {
-        return proBrand;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setProBrand(String proBrand) {
-        this.proBrand = proBrand;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public double getProPrice() {
-        return proPrice;
+    public int getProdStatus() {
+        return prodStatus;
     }
 
-    public void setProPrice(double proPrice) {
-        this.proPrice = proPrice;
+    public void setProdStatus(int prodStatus) {
+        this.prodStatus = prodStatus;
     }
 
-    public boolean isProStatus() {
-        return proStatus;
+    public double getUseCost() {
+        return useCost;
     }
 
-    public void setProStatus(boolean proStatus) {
-        this.proStatus = proStatus;
+    public void setUseCost(double useCost) {
+        this.useCost = useCost;
     }
 
 }

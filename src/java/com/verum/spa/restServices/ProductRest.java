@@ -15,16 +15,21 @@ import com.verum.spa.core.JsonResponses;
 import com.verum.spa.dao.DAOProduct;
 import com.verum.spa.model.Product;
 import java.sql.SQLException;
-import javax.ws.rs.DELETE;
+import java.util.ArrayList;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("product")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ProductRest {
 
     //Global variables
@@ -35,8 +40,8 @@ public class ProductRest {
     @POST
     @Path("add")
     public Response addProduct(Product pro) throws ClassNotFoundException, SQLException {
-        
-        if (daoPro.addProduct2(pro.getProName(), pro.getProBrand(), pro.getProPrice())) {
+
+        if (daoPro.addProduct(pro)) {
             flag = true;
             return Response.ok(JsonResponses.jsonResponse(flag)).build();
         } else {
@@ -45,10 +50,9 @@ public class ProductRest {
     }
 
     @PUT
-    public Response modifyProduct(@QueryParam("proName") String proName,
-            @QueryParam("proBrand") String proBrand,
-            @QueryParam("proPrice") Double proPrice) throws ClassNotFoundException, SQLException {
-        if (daoPro.modifyProduct(proName, proBrand, proPrice)) {
+    @Path("modify")
+    public Response modifyProduct(Product pro) throws ClassNotFoundException, SQLException {
+        if (daoPro.modifyProduct(pro)) {
             flag = true;
             return Response.ok(JsonResponses.jsonResponse(flag)).build();
         } else {
@@ -56,9 +60,10 @@ public class ProductRest {
         }
     }
 
-    @DELETE
-    public Response deleteProduct(@QueryParam("idPro") int idPro) throws ClassNotFoundException, SQLException {
-        if (daoPro.deleteProduct(idPro)) {
+    @PUT
+    @Path("logDelete")
+    public Response deleteProduct(Product pro) throws ClassNotFoundException, SQLException {
+        if (daoPro.deleteProduct(pro)) {
             flag = true;
             return Response.ok(JsonResponses.jsonResponse(flag)).build();
         } else {
@@ -73,12 +78,14 @@ public class ProductRest {
        solo activos (0).
         Si la aplicacion manda 1 quiere decir que se muestre tanto activos como inactivos
          */
-        value = new Gson().toJson(daoPro.productList(prefVis));
+//        value = new Gson().toJson(daoPro.productList(prefVis));
+        ArrayList<Product> pro = new ArrayList();
+        pro = daoPro.productList(prefVis);
+//        value = daoPro.productList(prefVis);
         if (value != null) {
-            return Response.ok(value).build();
+            return Response.ok(pro).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson("No se encontraron productos para mostrar.")).build();
         }
-
     }
 }

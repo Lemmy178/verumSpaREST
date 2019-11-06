@@ -20,14 +20,14 @@ public class DAOProduct {
     private String sql = "";
     private PreparedStatement pst;
 
-    public boolean addProduct(String proName, String proBrand, double proPrice) throws ClassNotFoundException, SQLException {
-        sql = "INSERT INTO PRODUCT(proName,proBrand,proPrice,proStatus) VALUES (?,?,?," + 1 + ")";
+    public boolean addProduct(Product pro) throws ClassNotFoundException, SQLException {
+        sql = "INSERT INTO PRODUCT(prodName,brand,prodStatus,useCost) VALUES (?,?,?," + 1 + ")";
 
         pst = conexion.startConnection().prepareStatement(sql);
 
-        pst.setString(1, proName);
-        pst.setString(2, proBrand);
-        pst.setDouble(3, proPrice);
+        pst.setString(1, pro.getProdName());
+        pst.setString(2, pro.getBrand());
+        pst.setDouble(3, pro.getUseCost());
 
         if (pst.executeUpdate() > 0) {
             conexion.closeConnection();
@@ -38,30 +38,14 @@ public class DAOProduct {
         }
     }
 
-    public boolean addProduct2(String proName, String proBrand, double proPrice) throws ClassNotFoundException, SQLException {
-        ConexionSpaMYSQL cone = new ConexionSpaMYSQL();
-        Connection conn;
-        PreparedStatement pst;
-        sql = "INSERT INTO PRODUCT(proName,proBrand,proPrice,proStatus) VALUES (?,?,?," + 1 + ")";
-        Class.forName(cone.getDRIVER());
-        conn = DriverManager.getConnection(cone.getPATH(), cone.getUSER(), cone.getPASS());
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, proName);
-        pst.setString(2, proBrand);
-        pst.setDouble(3, proPrice);
-        pst.executeUpdate();
-        conn.close();
-        return true;
-    }
-
-    public boolean modifyProduct(String proName, String proBrand, double proPrice) throws ClassNotFoundException, SQLException {
-        sql = "CALL MODIFYPRODUCT(?,?,?)";
-
+    public boolean modifyProduct(Product pro) throws ClassNotFoundException, SQLException {
+        sql = "UPDATE PRODUCT SET prodName = ? ,brand= ?, useCost= ? WHERE prodId = ?";
         pst = conexion.startConnection().prepareStatement(sql);
 
-        pst.setString(1, proName);
-        pst.setString(2, proBrand);
-        pst.setDouble(3, proPrice);
+        pst.setString(1, pro.getProdName());
+        pst.setString(2, pro.getBrand());
+        pst.setDouble(3, pro.getUseCost());
+        pst.setDouble(4, pro.getProdId());
 
         if (pst.executeUpdate() > 0) {
             conexion.closeConnection();
@@ -72,12 +56,12 @@ public class DAOProduct {
         }
     }
 
-    public boolean deleteProduct(int idPro) throws ClassNotFoundException, SQLException {
-
-        sql = "CALL MODIFYPRODUCT(?)";
+    public boolean deleteProduct(Product pro) throws ClassNotFoundException, SQLException {
+        sql = "UPDATE PRODUCT SET prodStatus = ? WHERE prodId=?";
 
         pst = conexion.startConnection().prepareStatement(sql);
-        pst.setBoolean(1, false);
+        pst.setInt(1, pro.getProdStatus());
+        pst.setInt(2, pro.getProdId());
 
         if (pst.executeUpdate() > 0) {
             conexion.closeConnection();
@@ -91,21 +75,21 @@ public class DAOProduct {
     public ArrayList<Product> productList(int preVis) throws SQLException, ClassNotFoundException {
         ResultSet rs;
         ArrayList<Product> productData = new ArrayList<>();
-        if (preVis == 0) {
             sql = "SELECT * FROM PRODUCT";
-        } else {
-            sql = "SELECT * FROM PRODUCT WHERE proStatus LIKE 0";
-        }
+//        if (preVis == 0) {
+//            sql = "SELECT * FROM PRODUCT";
+//        } else {
+//            sql = "SELECT * FROM PRODUCT WHERE prodStatus LIKE 0";
+//        }
 
         Class.forName(conexion.getDRIVER());
         pst = conexion.startConnection().prepareStatement(sql);
         rs = pst.executeQuery();
-
         if (rs.first()) {
             rs.beforeFirst();
             while (rs.next()) {
-                productData.add(new Product(rs.getInt("idPro"), rs.getString("proName"), rs.getString("proBrand"),
-                        rs.getDouble("proPrice"), rs.getBoolean("proStatus")));
+                productData.add(new Product(rs.getInt("prodId"), rs.getString("prodName"), rs.getString("brand"),
+                        rs.getInt("prodStatus"), rs.getFloat("useCost")));
             }
             conexion.closeConnection();
             return productData;
