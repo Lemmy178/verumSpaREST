@@ -40,7 +40,6 @@ public class ProductRest {
     @POST
     @Path("add")
     public Response addProduct(Product pro) throws ClassNotFoundException, SQLException {
-
         if (daoPro.addProduct(pro)) {
             flag = true;
             return Response.ok(JsonResponses.jsonResponse(flag)).build();
