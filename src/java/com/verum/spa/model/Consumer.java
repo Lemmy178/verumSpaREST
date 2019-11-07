@@ -11,6 +11,7 @@ package com.verum.spa.model;
  */
 public class Consumer {
 
+    private int conId;
     private String conName;
     private String pass;
     private String role;
@@ -18,10 +19,19 @@ public class Consumer {
     public Consumer() {
     }
 
-    public Consumer(String conName, String pass, String role) {
+    public Consumer(int conId, String conName, String pass, String role) {
+        this.conId = conId;
         this.conName = conName;
         this.pass = pass;
         this.role = role;
+    }
+
+    public int getConId() {
+        return conId;
+    }
+
+    public void setConId(int conId) {
+        this.conId = conId;
     }
 
     public String getConName() {

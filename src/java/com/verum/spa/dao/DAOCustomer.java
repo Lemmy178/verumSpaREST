@@ -46,7 +46,7 @@ public class DAOCustomer {
     public boolean modifyCustomer(Customer customer) throws ClassNotFoundException, SQLException {
         sql = "UPDATE CUSTOMER SET "
                 + "firstName = ?, lastName1 = ?, lastName2 = ?, gender = ?, perAddress = ?,"
-                + "telephone = ?, pass = ?,  email = ?, cusStatus = ?";
+                + "telephone = ?, pass = ?,  email = ?, cusStatus = ? WHERE cusId = " + customer.getCusId();
         pst = conexion.startConnection().prepareStatement(sql);
 
         pst.setString(1, customer.getFirstName());
@@ -69,10 +69,10 @@ public class DAOCustomer {
     }
 
     public boolean deleteCustomer(Customer customer) throws ClassNotFoundException, SQLException {
-        sql = "UPDATE CUSTOMER SET cusStatus = 2 WHERE uniqueNumber LIKE '?' ";
+        sql = "UPDATE CUSTOMER SET cusStatus = 2 WHERE cusId = ? ";
         pst = conexion.startConnection().prepareStatement(sql);
 
-        pst.setString(1, customer.getUniqueNumber());
+        pst.setInt(1, customer.getCusId());
 
         if (pst.executeUpdate() > 0) {
             conexion.closeConnection();
@@ -96,8 +96,8 @@ public class DAOCustomer {
             while (rs.next()) {
 //              String uniqueNumber, String email, int cusStatus, String conName, String pass, String role, String firstName, 
 //              String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc
-                customerData.add(new Customer(rs.getString("uniqueNumber"), rs.getString("email"),
-                        rs.getInt("cusStatus"), rs.getString("conName"), rs.getString("pass"), rs.getString("role"),
+                customerData.add(new Customer(rs.getInt("cusId"), rs.getString("uniqueNumber"), rs.getString("email"),
+                        rs.getInt("cusStatus"), rs.getInt("conId"), rs.getString("conName"), rs.getString("pass"), rs.getString("role"),
                         rs.getString("firstName"), rs.getString("lastName1"), rs.getString("lastName2"),
                         rs.getString("gender"), rs.getString("perAddress"), rs.getString("telephone"), rs.getString("rfc")));
             }
@@ -112,7 +112,7 @@ public class DAOCustomer {
         Customer customer1 = null;
         PreparedStatement pst;
         ResultSet rs;
-        sql = "SELECT * FROM LIST_CUSTOMER WHERE uniqueNumber LIKE '" + customer.getUniqueNumber() + "' ";
+        sql = "SELECT * FROM LIST_CUSTOMER WHERE cusid = " + customer.getCusId();
 
         Class.forName(conexion.getDRIVER());
         pst = conexion.startConnection().prepareStatement(sql);
@@ -122,8 +122,8 @@ public class DAOCustomer {
             while (rs.next()) {
 //              String uniqueNumber, String email, int cusStatus, String conName, String pass, String role, String firstName, 
 //              String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc
-                customer1 = new Customer(rs.getString("uniqueNumber"), rs.getString("email"),
-                        rs.getInt("cusStatus"), rs.getString("conName"), rs.getString("pass"), rs.getString("role"),
+                customer1 = new Customer(rs.getInt("cusStatus"), rs.getString("uniqueNumber"), rs.getString("email"),
+                        rs.getInt("cusStatus"), rs.getInt("conId"), rs.getString("conName"), rs.getString("pass"), rs.getString("role"),
                         rs.getString("firstName"), rs.getString("lastName1"), rs.getString("lastName2"),
                         rs.getString("gender"), rs.getString("perAddress"), rs.getString("telephone"), rs.getString("rfc"));
             }

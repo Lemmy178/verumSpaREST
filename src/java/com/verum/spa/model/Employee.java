@@ -11,6 +11,7 @@ package com.verum.spa.model;
  */
 public class Employee extends Person {
 
+    private int empId;
     private String empNumber;
     private String empPosition;
     private int empStatus;
@@ -21,15 +22,24 @@ public class Employee extends Person {
         this.consumer = new Consumer();
     }
 
-    public Employee(String empNumber, String empPosition, int empStatus, String photo,
+    public Employee(int empId, String empNumber, String empPosition, int empStatus, String photo, int conId,
             String conName, String pass, String role, String firstName, String lastName1, String lastName2,
             String gender, String perAddress, String telephone, String rfc) {
         super(firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
+        this.empId = empId;
         this.empNumber = empNumber;
         this.empPosition = empPosition;
         this.empStatus = empStatus;
         this.photo = photo;
-        this.consumer = new Consumer(conName, pass, role);//conName, pass, role
+        this.consumer = new Consumer(conId, conName, pass, role);//conName, pass, role
+    }
+
+    public int getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(int empId) {
+        this.empId = empId;
     }
 
     public String getEmpNumber() {

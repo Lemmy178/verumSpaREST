@@ -11,6 +11,7 @@ package com.verum.spa.model;
  */
 public class Customer extends Person {
 
+    private int cusId;
     private String uniqueNumber;
     private String email;
     private int cusStatus;
@@ -20,12 +21,21 @@ public class Customer extends Person {
         this.consumer = new Consumer();
     }
 
-    public Customer(String uniqueNumber, String email, int cusStatus, String conName, String pass, String role, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telephone, String rfc) {
+    public Customer(int cusId,String uniqueNumber, String email, int cusStatus,int conId, String conName, String pass, String role, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telephone, String rfc) {
         super(firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
+        this.cusId = cusId;
         this.uniqueNumber = uniqueNumber;
         this.email = email;
         this.cusStatus = cusStatus;
-        this.consumer = new Consumer(conName, pass, role);//conName, String pass, String role
+        this.consumer = new Consumer(conId,conName, pass, role);//conName, String pass, String role
+    }
+
+    public int getCusId() {
+        return cusId;
+    }
+
+    public void setCusId(int cusId) {
+        this.cusId = cusId;
     }
 
     public String getUniqueNumber() {
