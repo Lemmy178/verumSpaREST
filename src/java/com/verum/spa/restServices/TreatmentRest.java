@@ -28,30 +28,30 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TreatmentRest {
 
-    String value = "";
-    boolean flag = false;
-
-    @POST
-    @Path("add")
-    public Response addTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @PUT
-    @Path("modify")
-    public Response modifyTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @PUT
-    @Path("logDelete")
-    public Response deleteTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @GET
-    @Path("TreatmentList")
-    public Response TreatmentList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
-
-    }
+//    String value = "";
+//    boolean flag = false;
+//
+//    @POST
+//    @Path("add")
+//    public Response addTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @PUT
+//    @Path("modify")
+//    public Response modifyTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @PUT
+//    @Path("logDelete")
+//    public Response deleteTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @GET
+//    @Path("TreatmentList")
+//    public Response TreatmentList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
+//
+//    }
 }

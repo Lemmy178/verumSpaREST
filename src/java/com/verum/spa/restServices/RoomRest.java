@@ -30,28 +30,28 @@ public class RoomRest {
 
     String value = "";
     boolean flag = false;
-
-    @POST
-    @Path("add")
-    public Response addRoom(Room pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @PUT
-    @Path("modify")
-    public Response modifyRoom(Room pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @PUT
-    @Path("logDelete")
-    public Response deleteRoom(Room pro) throws ClassNotFoundException, SQLException {
-
-    }
-
-    @GET
-    @Path("roomList")
-    public Response RoomList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
-
-    }
+//
+//    @POST
+//    @Path("add")
+//    public Response addRoom(Room pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @PUT
+//    @Path("modify")
+//    public Response modifyRoom(Room pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @PUT
+//    @Path("logDelete")
+//    public Response deleteRoom(Room pro) throws ClassNotFoundException, SQLException {
+//
+//    }
+//
+//    @GET
+//    @Path("roomList")
+//    public Response RoomList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
+//
+//    }
 }
