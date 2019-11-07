@@ -10,8 +10,12 @@
  *===========================================================================*/
 package com.verum.spa.restServices;
 
+import com.google.gson.Gson;
+import com.verum.spa.core.JsonResponses;
+import com.verum.spa.dao.DAOTreatment;
 import com.verum.spa.model.Treatment;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -28,30 +32,51 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TreatmentRest {
 
-//    String value = "";
-//    boolean flag = false;
-//
-//    @POST
-//    @Path("add")
-//    public Response addTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-//
-//    }
-//
-//    @PUT
-//    @Path("modify")
-//    public Response modifyTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-//
-//    }
-//
-//    @PUT
-//    @Path("logDelete")
-//    public Response deleteTreatment(Treatment pro) throws ClassNotFoundException, SQLException {
-//
-//    }
-//
-//    @GET
-//    @Path("TreatmentList")
-//    public Response TreatmentList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
-//
-//    }
+    DAOTreatment daoTreat = new DAOTreatment();
+    String value = "";
+    boolean flag = false;
+
+    @POST
+    @Path("add")
+    public Response addTreatment(Treatment treat) throws ClassNotFoundException, SQLException {
+        if (daoTreat.addTreatment(treat)) {
+            flag = true;
+            return Response.ok(JsonResponses.jsonResponse(flag)).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
+        }
+    }
+
+    @PUT
+    @Path("modify")
+    public Response modifyTreatment(Treatment treat) throws ClassNotFoundException, SQLException {
+        if (daoTreat.modifyTreatment(treat)) {
+            flag = true;
+            return Response.ok(JsonResponses.jsonResponse(flag)).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
+        }
+    }
+
+    @PUT
+    @Path("logDelete")
+    public Response deleteTreatment(Treatment treat) throws ClassNotFoundException, SQLException {
+        if (daoTreat.addTreatment(treat)) {
+            flag = true;
+            return Response.ok(JsonResponses.jsonResponse(flag)).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(JsonResponses.jsonResponse(flag)).build();
+        }
+    }
+
+    @GET
+    @Path("TreatmentList")
+    public Response TreatmentList(@DefaultValue("0") @QueryParam("prefVis") int prefVis) throws SQLException, ClassNotFoundException {
+        ArrayList<Treatment> treat = daoTreat.roomList(prefVis);
+        if (treat != null) {
+            return Response.ok(treat).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson("No se encontraron salas para mostrar.")).build();
+        }
+    }
 }

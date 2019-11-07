@@ -1,5 +1,5 @@
 /*=============================================================================
- |       Author:  Ricrdo
+ |       Author:  Ricardo Iván Ramírez Bello
  |       Course:  Spa
  |     Due Date:  11/05/2019
  |  Description:  DAO Model
@@ -88,7 +88,7 @@ public class DAORoom {
             rs.beforeFirst();
             while (rs.next()) {
                 roomData.add(new Room(rs.getInt("roomId"), rs.getString("roomName"), rs.getString("roomDesc"),
-                        rs.getString("photo"), rs.getInt("roomStatus"), rs.getInt("brancId")));
+                        rs.getString("photo"), rs.getInt("roomStatus"), rs.getInt("branchId")));
             }
             conexion.closeConnection();
             return roomData;

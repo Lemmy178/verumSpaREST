@@ -1,7 +1,14 @@
+/*=============================================================================
+ |       Author:  Ricardo Iván Ramírez Bello
+ |       Course:  Spa
+ |     Due Date:  11/05/2019
+ |  Description:  DAO Model
+ |                
+ | Deficiencies:  
+ *===========================================================================*/
 package com.verum.spa.dao;
 
 import com.verum.spa.model.ConexionSpaMYSQL;
-import com.verum.spa.model.Room;
 import com.verum.spa.model.Treatment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
