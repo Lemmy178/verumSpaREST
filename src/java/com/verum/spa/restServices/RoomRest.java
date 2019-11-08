@@ -48,7 +48,7 @@ public class RoomRest {
     }
 
     @PUT
-    @Path("modify")
+    @Path("modifyRoom")
     public Response modifyRoom(Room room) throws ClassNotFoundException, SQLException {
         if (daoRoom.modifyRoom(room)) {
             flag = true;

@@ -8,30 +8,36 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
     @SerializedName("prodId")
+    @Expose
     private int prodId;
     @SerializedName("prodName")
+    @Expose
     private String prodName;
     @SerializedName("brand")
+    @Expose
     private String brand;
-    @SerializedName("prodStatus")
-    private int prodStatus;
     @SerializedName("useCost")
-    private double useCost;
+    @Expose
+    private Double useCost;
+    @SerializedName("prodStatus")
+    @Expose
+    private int prodStatus;
 
     public Product() {
     }
 
-    public Product(int prodId, String prodName, String brand, int prodStatus, double useCost) {
+    public Product(int prodId, String prodName, String brand, Double useCost,int prodStatus) {
         this.prodId = prodId;
         this.prodName = prodName;
         this.brand = brand;
-        this.prodStatus = prodStatus;
         this.useCost = useCost;
+        this.prodStatus = prodStatus;
     }
 
     public int getProdId() {

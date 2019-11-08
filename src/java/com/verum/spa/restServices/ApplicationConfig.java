@@ -34,6 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.verum.spa.restServices.ProductRest.class);
         resources.add(com.verum.spa.restServices.RoomRest.class);
         resources.add(com.verum.spa.restServices.TreatmentRest.class);
+        resources.add(com.verum.spa.restServices.pruebas.class);
     }
     
 }

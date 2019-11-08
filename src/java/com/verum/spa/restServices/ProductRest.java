@@ -6,7 +6,7 @@
  |                
  | Deficiencies:  Falta de acentos en respuestas.
 
-                http://localhost:8080/VerumRESTSpa/api/product
+                http://localhost:8080/VerumRESTSpa/api/productVerumRESTSpa
  *===========================================================================*/
 package com.verum.spa.restServices;
 
@@ -82,7 +82,9 @@ public class ProductRest {
         pro = daoPro.productList(prefVis);
 //        value = daoPro.productList(prefVis);
         if (value != null) {
-            return Response.ok(pro).build();
+            Gson s = new Gson();
+
+            return Response.ok(s.toJson(pro)).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson("No se encontraron productos para mostrar.")).build();
         }

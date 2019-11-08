@@ -15,6 +15,8 @@ public class Room {
     private String photo;
     private int roomStatus;
     private int branchId;
+    
+    public Room(){}
 
     public Room(int roomId, String roomName, String roomDesc, String photo, int roomStatus, int branchId) {
         this.roomId = roomId;

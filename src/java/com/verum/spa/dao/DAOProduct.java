@@ -75,7 +75,7 @@ public class DAOProduct {
     public ArrayList<Product> productList(int preVis) throws SQLException, ClassNotFoundException {
         ResultSet rs;
         ArrayList<Product> productData = new ArrayList<>();
-            sql = "SELECT * FROM PRODUCT";
+        sql = "SELECT * FROM PRODUCT";
 //        if (preVis == 0) {
 //            sql = "SELECT * FROM PRODUCT";
 //        } else {
@@ -85,17 +85,12 @@ public class DAOProduct {
         Class.forName(conexion.getDRIVER());
         pst = conexion.startConnection().prepareStatement(sql);
         rs = pst.executeQuery();
-        if (rs.first()) {
-            rs.beforeFirst();
-            while (rs.next()) {
-                productData.add(new Product(rs.getInt("prodId"), rs.getString("prodName"), rs.getString("brand"),
-                        rs.getInt("prodStatus"), rs.getFloat("useCost")));
-            }
-            conexion.closeConnection();
-            return productData;
-        } else {
-            return null;
-        }
-    }
 
+        while (rs.next()) {
+            productData.add(new Product(rs.getInt("prodId"), rs.getString("prodName"), rs.getString("brand"),
+                    rs.getDouble("useCost"), rs.getInt("prodStatus")));
+        }
+        conexion.closeConnection();
+        return productData;
+    }
 }

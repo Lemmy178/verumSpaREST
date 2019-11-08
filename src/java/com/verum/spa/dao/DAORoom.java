@@ -22,13 +22,14 @@ public class DAORoom {
     private PreparedStatement pst;
 
     public boolean addRoom(Room room) throws ClassNotFoundException, SQLException {
-        sql = "INSERT INTO ROOM(roomName,roomDesc,photo,roomStatus,brancId) VALUES (?,?,?," + 1 + ")";
+        sql = "INSERT INTO ROOM(roomName,roomDesc,photo,roomStatus,branchId) VALUES (?,?,?,?,?)";
         pst = conexion.startConnection().prepareStatement(sql);
 
         pst.setString(1, room.getRoomName());
         pst.setString(2, room.getRoomDesc());
         pst.setString(3, room.getPhoto());
-        pst.setInt(4, room.getBranchId());
+        pst.setInt(4, room.getRoomStatus());
+        pst.setInt(5, room.getBranchId());
 
         if (pst.executeUpdate() > 0) {
             conexion.closeConnection();
@@ -40,7 +41,7 @@ public class DAORoom {
     }
 
     public boolean modifyRoom(Room room) throws ClassNotFoundException, SQLException {
-        sql = "UPDATE ROOM SET roomName = ?, roomDesc=?,photo= ?, brancId= ? WHERE roomId = ?";
+        sql = "UPDATE ROOM SET roomName = ?, roomDesc=?,photo= ?, branchId= ? WHERE roomId = ?";
         pst = conexion.startConnection().prepareStatement(sql);
 
         pst.setString(1, room.getRoomName());
