@@ -30,6 +30,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.verum.spa.restServices.BranchRest.class);
+        resources.add(com.verum.spa.restServices.CustomerREST.class);
+        resources.add(com.verum.spa.restServices.EmployeeREST.class);
         resources.add(com.verum.spa.restServices.GenericResource.class);
         resources.add(com.verum.spa.restServices.ProductRest.class);
         resources.add(com.verum.spa.restServices.RoomRest.class);
